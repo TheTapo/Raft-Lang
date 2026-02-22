@@ -15,20 +15,28 @@
       pname = "raft-lang";
       version = "dev";
 
-      # Pointing to the local repository
       src = ./.;
 
-      # Tools needed to build the project
       nativeBuildInputs = with pkgs; [
         cmake
       ];
 
-      # Libraries needed by the project
       buildInputs = with pkgs; [
         llvm 
       ];
       
-      # CMake automatically handles the configure, build, and install phases in Nix!
+      # We override the default install phase to handle it ourselves
+      installPhase = ''
+        # Create the bin directory in the output path
+        mkdir -p $out/bin
+        
+        # Copy the compiled executable to the bin directory
+        # (Assuming it outputs to bin/raft based on your log)
+        cp ../bin/raft $out/bin/
+      '';
+      
+      # Optional: explicitly tell Nix what the main executable is called
+      meta.mainProgram = "raft";
     };
   };
 }
