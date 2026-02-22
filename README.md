@@ -5,6 +5,7 @@ Currently Raft's only install method is Nix.
 Make sure to enable flakes.
 ~~~
 git clone https://github.com/TheTapo/Raft-Lang
+cd Raft-Lang
 nix build .
 nix profile install .
 ~~~
